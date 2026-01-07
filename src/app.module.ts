@@ -16,8 +16,8 @@ import { OrdersModule } from './orders/orders.module';
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => {
-        const uri = configService.get<string>('MONGO_URI');
-        console.log('Connecting to MongoDB with URI:', uri ? uri.replace(/:([^@]+)@/, ':****@') : 'UNDEFINED');
+        const uri = configService.get<string>('MONGO_URI') || 'mongodb://localhost:27017/n2-fallback'; // Fallback
+        console.log('Connecting to MongoDB with URI:', uri);
         return {
           uri: uri,
         };
